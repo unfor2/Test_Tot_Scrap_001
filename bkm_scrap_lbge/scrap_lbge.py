@@ -9,7 +9,7 @@ from datetime import date
 
 
 
-def readParimatch () :
+def readLeaderbet () :
     tot_code = 'parimatch.ge'
     year_now = date.today()
     year_str = '{}'.format(year_now.year)
@@ -18,8 +18,7 @@ def readParimatch () :
     con = psycopg2.connect(conn_string)
     con.autocommit = True
     cur = con.cursor()
-    cur.execute('delete from tbl_save_info_ver001 where "Bookmaker" = \'{}\' '.format(tot_code))
-    print('delete from tbl_save_info_ver001 where "Bookmaker" = ''{}'' '.format(tot_code))
+    cur.execute('delete from tbl_save_info_ver001 where "Bookmaker" = {}'.format(tot_code))
 
     insert_statement = '''INSERT INTO tbl_save_info_ver001 ("Bookmaker", "SportName_original", "EventGroup_original", "EventTime", 
                                       "EventTimeStr", "EventCode", "Player_1_original", "Player_2_original", "Bet_Type_original",
@@ -27,7 +26,7 @@ def readParimatch () :
 
 
     timeout = 5
-    page_URL = "https://www.parimatch.ge/"
+    page_URL = "https://www.lider-bet.com/"
     option = webdriver.ChromeOptions().add_argument(' — incognito')
     chromedriverpath =  os.path.dirname(os.path.realpath(__file__))[0:-14] + '/venv/selenium/webdriver/chromedriver.exe'
     chromedriver_path = os.path.normpath(chromedriverpath)
