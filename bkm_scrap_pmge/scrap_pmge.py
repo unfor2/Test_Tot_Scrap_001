@@ -14,12 +14,12 @@ def readParimatch () :
     year_now = date.today()
     year_str = '{}'.format(year_now.year)
 
-    conn_string = "host='localhost' dbname='Tot_Scrap_01' user='postgres' password='`12'"
+    conn_string = "host='localhost' dbname='tot_scrap_01' user='postgres' password='`12'"
     con = psycopg2.connect(conn_string)
     con.autocommit = True
     cur = con.cursor()
     cur.execute('delete from tbl_save_info_ver001 where "Bookmaker" = \'{}\' '.format(tot_code))
-    print('delete from tbl_save_info_ver001 where "Bookmaker" = ''{}'' '.format(tot_code))
+    #print('delete from tbl_save_info_ver001 where "Bookmaker" = ''{}'' '.format(tot_code))
 
     insert_statement = '''INSERT INTO tbl_save_info_ver001 ("Bookmaker", "SportName_original", "EventGroup_original", "EventTime", 
                                       "EventTimeStr", "EventCode", "Player_1_original", "Player_2_original", "Bet_Type_original",
@@ -27,11 +27,11 @@ def readParimatch () :
 
 
     timeout = 5
-    page_URL = "https://www.parimatch.ge/"
+    page_URL = "https://www.parimatch.ge/en/"
     option = webdriver.ChromeOptions().add_argument(' — incognito')
     chromedriverpath =  os.path.dirname(os.path.realpath(__file__))[0:-14] + '/venv/selenium/webdriver/chromedriver.exe'
     chromedriver_path = os.path.normpath(chromedriverpath)
-    print(chromedriver_path)
+    #print(chromedriver_path)
 
 
     #driver = webdriver.Chrome("/home/unfor2/PycharmProjects/TestTot001/venv/selenium/webdriver/chromedriver", chrome_options=option)
@@ -39,6 +39,9 @@ def readParimatch () :
     driver.get(page_URL)
     WebDriverWait(driver, timeout).until(EC.visibility_of_element_located((By.XPATH, "//html//body//div[3]//route//center-block//main//aside[1]//sidemenu//sidemenu-block[3]//div//div[2]//div//sidemenu-prematch")))
     #time.sleep(5)
+    #driver.find_elements_by_xpath('//*[@id="wrapper"]/route/center-block/site-header/header/div[1]/div/div[1]/div/settings-dropdown/dropdown')[0].click()
+    #driver.find_elements_by_link_text('EN')[0].click()
+    #time.sleep(timeout)
     event_blocks = driver.find_elements_by_class_name("sportbox-head__add") # Читаем все виды спорта
     for l_bl in event_blocks:
         # Для всех видов спорта
