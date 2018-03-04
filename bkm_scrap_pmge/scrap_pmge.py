@@ -27,7 +27,7 @@ def readParimatch () :
 
 
     timeout = 5
-    page_URL = "https://www.parimatch.ge/en/"
+    page_URL = "https://www.parimatch.ge/"
     option = webdriver.ChromeOptions().add_argument(' — incognito')
     chromedriverpath =  os.path.dirname(os.path.realpath(__file__))[0:-14] + '/venv/selenium/webdriver/chromedriver.exe'
     chromedriver_path = os.path.normpath(chromedriverpath)
@@ -39,9 +39,9 @@ def readParimatch () :
     driver.get(page_URL)
     WebDriverWait(driver, timeout).until(EC.visibility_of_element_located((By.XPATH, "//html//body//div[3]//route//center-block//main//aside[1]//sidemenu//sidemenu-block[3]//div//div[2]//div//sidemenu-prematch")))
     #time.sleep(5)
-    #driver.find_elements_by_xpath('//*[@id="wrapper"]/route/center-block/site-header/header/div[1]/div/div[1]/div/settings-dropdown/dropdown')[0].click()
-    #driver.find_elements_by_link_text('EN')[0].click()
-    #time.sleep(timeout)
+    driver.find_elements_by_xpath('//*[@id="wrapper"]/route/center-block/site-header/header/div[1]/div/div[1]/div/settings-dropdown/dropdown')[0].click()
+    driver.find_elements_by_link_text('EN')[0].click()
+    time.sleep(timeout * 2)
     event_blocks = driver.find_elements_by_class_name("sportbox-head__add") # Читаем все виды спорта
     for l_bl in event_blocks:
         # Для всех видов спорта
